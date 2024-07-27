@@ -14,6 +14,8 @@
 
 ## ローカルでの実行方法(バックエンド)
 
+node.js や npm はインストール済みとして
+
 ```ps
 git clone https://github.com/ryohei-ochi-fr/getKomonDeMeisai.git
 cd getKomonDeMeisai
@@ -24,9 +26,37 @@ npx ts-node index.ts ネットde顧問のID パスワード
 
 ## linux(ubuntu)の場合
 
+[【2023年4月版】Ubuntu に node.js と npm を入れたい（バージョン管理も） #Node.js - Qiita](https://qiita.com/nouernet/items/d6ad4d5f4f08857644de)
+
 ```bash
+sudo apt install -y nodejs npm
+sudo npm install n -g
+sudo n stable
+
+cd getKomonDeMeisai
 npx playwright install
 sudo npx playwright install-deps
+```
+
+https化するために、いったんapache2を入れとく
+AWSのセキュリティーグループも設定しておく
+DNSの設定も当然やっとく
+
+```bash
+sudo apt -y install apache2
+sudo a2enmod ssl
+sudo systemctl enable apache2
+sudo systemctl start apache2
+sudo systemctl status apache2
+
+sudo apt -y install certbot
+sudo certbot certonly --webroot -w /var/www/html -d alain.davidovich-pompo.net
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/alain.davidovich-pompo.net/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/alain.davidovich-pompo.net/privkey.pem
+
+
 ```
 
 ## イカメモ
