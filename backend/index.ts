@@ -1,7 +1,8 @@
 import { chromium } from "playwright";
+import { exit } from "process";
 import fs from "fs";
 import path from "path";
-import { exit } from "process";
+
 
 (async () => {
   if (typeof process.argv[2] === "undefined") {
@@ -15,7 +16,6 @@ import { exit } from "process";
 
   const id = process.argv[2];
   const pw = process.argv[3];
-  // const downloadPath = __dirname.replace('backend', 'download\\temp\\');
   const downloadPath = __dirname.replace("backend", "download");
   const savePath = __dirname.replace("backend", "download\\");
   console.log("download path: %s", savePath);
@@ -25,41 +25,24 @@ import { exit } from "process";
   let meisaiNum: number = 0;
   let destPath: string = "";
 
-  // PDF出力の個別フォルダ
-  if (!fs.existsSync(savePath + id)) {
-    fs.mkdirSync(savePath + id);
-  }
-
   // ブラウザのユーザデータを作成する
   const userDataDir = path.join(__dirname, "user_data");
   if (!fs.existsSync(userDataDir)) {
     fs.mkdirSync(userDataDir);
   }
-  console.log(userDataDir);
 
-  const browser = await chromium.launchPersistentContext(userDataDir, {
-    headless: false,
-    slowMo: 500,
-    downloadsPath: downloadPath, // ダウンロード先フォルダを指定
-    args: ["--disable-extensions"],
-  });
-
-  const pageSetting = await browser.newPage();
-  await pageSetting.goto("chrome://settings/content/pdfDocuments");
-
-  // PDFをダウンロードする
-  // <div id="labelWrapper" class="cr-padded-text"><div id="label" aria-hidden="true">  PDF をダウンロードする  <slot name="label"></slot></div><div class="secondary" hidden=""><slot name="sub-label"></slot></div></div>
-
-  // ChromeでPDFを開く
-  // <div id="labelWrapper" class="cr-padded-text"><div id="label" aria-hidden="true">  Chrome で PDF を開く  <slot name="label"></slot></div><div class="secondary" hidden=""><slot name="sub-label"></slot></div></div>
-
-  // 最初に見つかったエレメントをクリックする → PDFをダウンロードする
-  try {
-    await pageSetting.getByText("PDF をダウンロードする").click();
-    pageSetting.close();
-  } catch (e) {
-    console.error("crome設定エラー");
+  // PDFを内部ビュワーで開かない設定とする
+  const defaultPreferences = {
+    plugins: {
+      always_open_pdf_externally: true,
+    },
   }
+  fs.writeFileSync(userDataDir + '/Default/Preferences', JSON.stringify(defaultPreferences));
+
+  const browser = await chromium.launchPersistentContext(userDataDir,{
+    headless: true,
+    slowMo: 500,
+  });
 
   const page = await browser.newPage();
   await page.goto("https://www1.shalom-house.jp/komon/login.aspx");
@@ -288,4 +271,5 @@ import { exit } from "process";
 
   // ブラウザを閉じる
   await browser.close();
+
 })();
