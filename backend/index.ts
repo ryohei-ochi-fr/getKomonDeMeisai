@@ -174,7 +174,7 @@ import path from "path";
               destPath =
                 savePath +
                 id +
-                "\\" +
+                "/" +
                 "給与明細書_" +
                 id +
                 "_" +
@@ -211,7 +211,7 @@ import path from "path";
           destPath =
             savePath +
             id +
-            "\\" +
+            "/" +
             "給与明細書_" +
             id +
             "_" +
