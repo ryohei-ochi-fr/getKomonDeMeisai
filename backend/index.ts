@@ -284,8 +284,9 @@ import { exit } from "process";
   // Kyuyo_viewer.aspx ここがpdf
 
   // ページを閉じる
-  //   await page.close();
+  await page.close();
 
   // ブラウザを閉じる
-  //   await browser.close();
+  await browser.close();
+  
 })();
