@@ -6,13 +6,18 @@ import { exit } from "process";
 (async () => {
   if (typeof process.argv[2] === "undefined") {
     console.log("usage: npx ts-node id pw");
-    console.log("download path: %s", __dirname.replace('backend', 'download\\'));
+    console.log(
+      "download path: %s",
+      __dirname.replace("backend", "download\\")
+    );
     exit();
   }
 
   const id = process.argv[2];
   const pw = process.argv[3];
-  const savePath = __dirname.replace('backend', 'download\\');
+  // const downloadPath = __dirname.replace('backend', 'download\\temp\\');
+  const downloadPath = __dirname.replace("backend", "download");
+  const savePath = __dirname.replace("backend", "download\\");
   console.log("download path: %s", savePath);
 
   let selectedYaer: string = "";
@@ -35,7 +40,7 @@ import { exit } from "process";
   const browser = await chromium.launchPersistentContext(userDataDir, {
     headless: false,
     slowMo: 500,
-    downloadsPath: savePath, // ダウンロード先フォルダを指定
+    downloadsPath: downloadPath, // ダウンロード先フォルダを指定
     args: ["--disable-extensions"],
   });
 
@@ -182,7 +187,6 @@ import { exit } from "process";
                 .click();
 
               const download = await downloadPromise;
-              await download.saveAs(savePath + download.suggestedFilename());
 
               destPath =
                 savePath +
@@ -198,11 +202,8 @@ import { exit } from "process";
                 i.toString() +
                 ".pdf";
 
-              // ファイル名のリネーム
-              await fs.renameSync(
-                savePath + download.suggestedFilename(),
-                destPath
-              );
+              await download.saveAs(destPath);
+              await download.delete();
 
               // 戻るボタン押下
               await page
@@ -223,7 +224,6 @@ import { exit } from "process";
             .click();
 
           const download = await downloadPromise;
-          await download.saveAs(savePath + download.suggestedFilename());
 
           destPath =
             savePath +
@@ -237,17 +237,17 @@ import { exit } from "process";
             targetMonth +
             "月.pdf";
 
-          // ファイル名のリネーム
-          await fs.renameSync(
-            savePath + download.suggestedFilename(),
-            destPath
-          );
+          await download.saveAs(destPath);
+          await download.delete();
 
           // 戻るボタン押下
           await page
             .locator('//*[@id="ctl00_ContentPlaceHolder1_btnClose"]')
             .click();
         }
+
+        // キャッシュクリアのショートカット
+        //await page.keyboard.press('Shift+Control+Delete')
       }
     }
   }
@@ -288,5 +288,4 @@ import { exit } from "process";
 
   // ブラウザを閉じる
   await browser.close();
-  
 })();
