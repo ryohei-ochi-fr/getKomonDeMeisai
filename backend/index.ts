@@ -9,7 +9,7 @@ import path from "path";
     console.log("usage: npx ts-node id pw");
     console.log(
       "download path: %s",
-      __dirname.replace("backend", "download\\")
+      __dirname.replace("backend", "download/")
     );
     exit();
   }
@@ -17,7 +17,7 @@ import path from "path";
   const id = process.argv[2];
   const pw = process.argv[3];
   const downloadPath = __dirname.replace("backend", "download");
-  const savePath = __dirname.replace("backend", "download\\");
+  const savePath = __dirname.replace("backend", "download/");
   console.log("download path: %s", savePath);
 
   let selectedYaer: string = "";
