@@ -37,12 +37,12 @@ import path from "path";
       always_open_pdf_externally: true,
     },
   }
-  fs.writeFileSync(userDataDir + '/Default/Preferences', JSON.stringify(defaultPreferences));
-
   const browser = await chromium.launchPersistentContext(userDataDir,{
     headless: true,
     slowMo: 500,
   });
+
+  fs.writeFileSync(userDataDir + '/Default/Preferences', JSON.stringify(defaultPreferences));
 
   const page = await browser.newPage();
   await page.goto("https://www1.shalom-house.jp/komon/login.aspx");
