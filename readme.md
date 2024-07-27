@@ -16,9 +16,17 @@
 
 ```ps
 git clone https://github.com/ryohei-ochi-fr/getKomonDeMeisai.git
+cd getKomonDeMeisai
 npm install
 cd backend
 npx ts-node index.ts ネットde顧問のID パスワード
+```
+
+## linux(ubuntu)の場合
+
+```bash
+npx playwright install
+sudo npx playwright install-deps
 ```
 
 ## イカメモ
