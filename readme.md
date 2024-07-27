@@ -12,12 +12,13 @@
 - nest.js
 - playwright
 
-## ローカル開発の始め方
+## ローカルでの実行方法(バックエンド)
 
 ```ps
 git clone https://github.com/ryohei-ochi-fr/getKomonDeMeisai.git
-cd backend
 npm install
+cd backend
+npx ts-node index.ts ネットde顧問のID パスワード
 ```
 
 ## イカメモ
