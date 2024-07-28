@@ -37,8 +37,11 @@ import path from "path";
       always_open_pdf_externally: true,
     },
   }
+  
+  // ヘッドレス(ブラウザの非表示)も可能だけど、今回はあえて false にしてます。
   const browser = await chromium.launchPersistentContext(userDataDir,{
-    headless: true,
+    // headless: true, // 非表示
+    headless: false, // 表示
     slowMo: 500,
   });
 
@@ -122,7 +125,6 @@ import path from "path";
 
         // 年を指定する
         // selectedYaer = "2023";
-        //selectedYaer = targetYaer?.toString;
         await page.selectOption(
           '//*[@id="ctl00_ContentPlaceHolder1_cboNen"]',
           targetYaer
@@ -229,11 +231,13 @@ import path from "path";
             .click();
         }
 
-        // キャッシュクリアのショートカット
+        // キャッシュクリアのショートカット(効かなかったし不要)
         //await page.keyboard.press('Shift+Control+Delete')
       }
     }
   }
+
+  // 開発者モードで要素を選択して、XPath式で要素をある程度は事前に特定しておく、以下はメモ
 
   // 印刷ボタン
   // //*[@id="ctl00_ContentPlaceHolder1_btnPrint"]

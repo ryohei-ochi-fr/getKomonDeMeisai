@@ -1,20 +1,28 @@
-# ネットde顧問の給料明細をダウンロードするぞ
+# ネットde顧問の給与明細書を全部ダウンロードするぞ
 
-2024/7/31で契約が切れる前に、給料明細を取得しておこう
+2024/7/31で契約が切れる前に、給与明細書を取得しておこう
 
 ## 概要
 
 後で書くから(ry..
 
-## 環境
+## 動作環境
 
-- node.js
-- nest.js
+- Node.js
 - playwright
+- gitコマンド ※1
 
-## ローカルでの実行方法(バックエンド)
+Node.js のインストールについては、[こちら](install.md)。
 
-node.js や npm はインストール済みとして
+もしくはググってください。
+
+※1 gitコマンドに関しては必須ではなく、プロジェクトを ZIP でダウンロードしても問題ないです。
+
+![](image-3.png)
+
+## 実行方法
+
+powershellやコマンドラインで、以下のコマンドを実行するだけです。
 
 ```ps
 git clone https://github.com/ryohei-ochi-fr/getKomonDeMeisai.git
@@ -24,60 +32,29 @@ cd backend
 npx ts-node index.ts ネットde顧問のID パスワード
 ```
 
-## linux(ubuntu)の場合
+給与明細書は、`download`以下にネットde顧問のID毎のフォルダに作成されます。
 
-[【2023年4月版】Ubuntu に node.js と npm を入れたい（バージョン管理も） #Node.js - Qiita](https://qiita.com/nouernet/items/d6ad4d5f4f08857644de)
+## おまけ
 
-```bash
-sudo apt install -y nodejs npm
-sudo npm install n -g
-sudo n stable
+ヘッドレス(ブラウザの非表示)で実行も可能ですが、今回はあえて false にしてます。
 
-cd getKomonDeMeisai
-npx playwright install
-sudo npx playwright install-deps
+Ubuntuで動作を確認したときはもちろん`false`のヘッドレスモード。
+
+AWS の Ubunthu で、X-Window などインストールしなくても、SSH したコンソールから、ヘッドレスでブラウザが動いているという不思議、不思議。
+
+```Typescript
+  const browser = await chromium.launchPersistentContext(userDataDir,{
+    // headless: true, // 非表示
+    headless: false, // 表示
+    slowMo: 500,
+  });
 ```
 
-https化するために、いったんapache2を入れとく
-AWSのセキュリティーグループも設定しておく
-DNSの設定も当然やっとく
+## 参考情報
 
-```bash
-sudo apt -y install apache2
-sudo a2enmod ssl
-sudo systemctl enable apache2
-sudo systemctl start apache2
-sudo systemctl status apache2
+[初心者からずっと使い続けたいPlaywrightスクリプトチートシート #自動テスト - Qiita](https://qiita.com/yurihyp/items/c538bc667e68dcbfff03)
 
-sudo apt -y install certbot
-sudo certbot certonly --webroot -w /var/www/html -d alain.davidovich-pompo.net
+[Playwright コードスニペット #TypeScript - Qiita](https://qiita.com/jyoppomu/items/fab53e0b579d3f18c5ef)
 
-Successfully received certificate.
-Certificate is saved at: /etc/letsencrypt/live/alain.davidovich-pompo.net/fullchain.pem
-Key is saved at:         /etc/letsencrypt/live/alain.davidovich-pompo.net/privkey.pem
+[List of Chromium Command Line Switches « Peter Beverloo](https://peter.sh/experiments/chromium-command-line-switches/)
 
-
-```
-
-## イカメモ
-
-TypeScriptでReactに入門するチュートリアル #create-react-app - Qiita https://qiita.com/yonetty/items/012be4c5c6258a609e35
-今からはじめるReact.js〜初めてのコンポーネント〜 #React - Qiita https://qiita.com/kuniken/items/963cb977dffd3e662e40
-
-```ps
-npm init
-npm init playwright@latest
-npm install ts-node @types/node
-
-cd backend
-npx ts-node index.ts
-
-
-npx create-react-app frontend
-cd frontend
-npm start
-```
-
-List of Chromium Command Line Switches « Peter Beverloo https://peter.sh/experiments/chromium-command-line-switches/
-
-Playwright コードスニペット #TypeScript - Qiita https://qiita.com/jyoppomu/items/fab53e0b579d3f18c5ef#%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BF%9D%E5%AD%98
