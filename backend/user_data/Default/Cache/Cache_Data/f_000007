@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+	<title>ネットde顧問＿ログイン</title>
+	<link rel="apple-touch-icon" href="images/iphone-icon.png" />
+	<link rel="apple-touch-icon-precomposed" href="images//iphone-icon.png" />
+	<link rel="stylesheet" type="text/css" href="css/komon.css?20240604" />
+	<script type="text/JavaScript" src="js_file/komon.js?20240430"></script>
+	<script type="text/javascript">
+   <!--
+        document.onkeydown = EnterDown;
+		function EnterDown() {
+			// 二要素フラグの判定を追加、０であれば従来、それ以外は二要素状態なので制御せず
+            var FaType = document.getElementById("TwoFaType").value;
+            if (event.keyCode == 13 && FaType == "0") {
+	            document.getElementById("btnLogin").click();
+	        }
+	    }
+
+	    function ConfirmOverWriteLogin(){
+	        var msg = "";
+	        var loginID = document.getElementById("LoginedID").value;
+	        if(loginID != ""){
+
+	            msg = "既にログインID「" + loginID + "」でログインされています。\n";
+	            msg += "別のタブで「" + loginID + "」でログインしている場合はログアウト操作を行ってから再度ログインしてください。";
+	            alert(msg);
+                document.getElementById("LoginedID").value = "";
+
+	        }
+	    }
+
+	    /**
+         * ログインIDのロストフォーカスイベント
+         * element : 呼び出し元のTextBox
+         */
+	    function OnBlurLoginId(element)
+	    {
+	        var str = element.value;
+
+	        if (str != undefined)
+	        {
+	            // 全角⇒半角
+	            str = toWidthToHalf(str);
+
+	            // 前後のスペース削除
+	            str = str.trim();
+
+	            // 元のテキストボックスに値をセットし直す
+	            element.value = str;
+	        }
+		}
+
+		function FaCancel() {
+			var loginID = document.getElementById("TwoFaType");
+			loginID.value = "0";
+		}
+
+        function nextfeild2(str, len) {
+            if (str.value.length >= len) {
+                for (var i = 0, elm = str.form.elements; i < elm.length; i++) {
+                    if (elm[i] == str && event.keyCode == 13) {
+                        (elm[i + 1] || elm[0]).focus();
+                        break;
+                    }
+                }
+			}
+            return (str);
+		}
+	//-->   	
+    </script>
+	<style type="text/css">
+	    body{background-color:#F5F8FA; margin:0; padding:0;}
+	    form{margin:0; padding:0;}
+	    a,a:hover{text-decoration:none; font-weight:normal ; letter-spacing:0px; color:#2C6AA9 !important;}
+	    a:hover{color:#2B4A71 !important;}
+	    .logWrap{margin-top:100px;}
+	    .w740{
+		    width:100%;
+		    margin-top:40px;
+	    }
+    	
+	    .gotoList2{
+		    border-top:1px solid #9FB8D5; 
+		    border-bottom:1px solid #9FB8D5; 
+		    background-color:#fff;
+		    margin:10px;
+		    padding:0;
+		    text-align:left;
+	    }
+    	
+	    .right{text-align:right; margin-right:10px;}
+	    .conData{border-bottom:1px dotted #aaa;}
+	    .logFooter{margin-top:0px;}
+	    .btnDummy{ width:0px; height:0px; border:inherit;}
+	</style>
+</head>
+<body>
+	<form name="form1" method="post" action="./login.aspx" id="form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjEyNDc5NzA5D2QWAmYPZBYMAgMPDxYCHgdWaXNpYmxlaGRkAgcPD2QWAh4Fc3R5bGUFEmltZS1tb2RlOmRpc2FibGVkO2QCCw8PFgIeCEltYWdlVXJsBRsva29tb24vaW1hZ2VzL2J0bl9sb2dpbi5naWYWBB4Lb25tb3VzZW92ZXIFPE1NX3N3YXBJbWFnZSh0aGlzLmlkLCcnLCcva29tb24vaW1hZ2VzL2J0bl9sb2dpbl9vbi5naWYnLDEpOx4Kb25tb3VzZW91dAUUTU1fc3dhcEltZ1Jlc3RvcmUoKTtkAhoPZBYCAgEPDxYCHgtOYXZpZ2F0ZVVybAVXL2NsYV9tYW51YWwvZG9jL++8kuimgee0oOiqjeiovOOCs+ODvOODieWPluW+l+OCouODl+ODqiDjgqTjg7Pjgrnjg4jjg7zjg6vmiYvpoIbmm7gucGRmFgIeCGRvd25sb2FkZWQCLw9kFgQCAQ8PFgIfAgUfL2tvbW9uL2ltYWdlcy9idG5fbG9naW5fdHdvLmdpZhYEHwMFQE1NX3N3YXBJbWFnZSh0aGlzLmlkLCcnLCcva29tb24vaW1hZ2VzL2J0bl9sb2dpbl90d29fb24uZ2lmJywxKTsfBAUUTU1fc3dhcEltZ1Jlc3RvcmUoKTtkAgMPDxYCHwIFIC9rb21vbi9pbWFnZXMvYnRuX2xvZ2luX09ubHkuZ2lmFgQfAwVBTU1fc3dhcEltYWdlKHRoaXMuaWQsJycsJy9rb21vbi9pbWFnZXMvYnRuX2xvZ2luX29uX09ubHkuZ2lmJywxKTsfBAUUTU1fc3dhcEltZ1Jlc3RvcmUoKTtkAjMPPCsAEQMADxYEHgtfIURhdGFCb3VuZGceC18hSXRlbUNvdW50AgNkARAWABYAFgAMFCsAABYCZg9kFggCAQ9kFgZmD2QWAgIBDw8WAh8AaGRkAgEPZBYCAgEPDxYCHgRUZXh0BQoyMDI0LzA3LzE2ZGQCAg9kFgJmDxUCBDExMTRK44CQ6Kej5raI44CR44ON44OD44OIZGXpoafllY/jgavjg63jgrDjgqTjg7PjgafjgY3jgarjgYTkuovosaHjgavjgaTjgYTjgaZkAgIPZBYGZg9kFgICAQ8PFgIfAGhkZAIBD2QWAgIBDw8WAh8JBQoyMDI0LzA2LzI2ZGQCAg9kFgJmDxUCBDExMTMtMjAyNOW5tDbmnIgyNuaXpSjmsLQp44Oq44Oq44O844K544Gu44GU5qGI5YaFZAIDD2QWBmYPZBYCAgEPDxYCHwBoZGQCAQ9kFgICAQ8PFgIfCQUKMjAyNC8wNi8yMGRkAgIPZBYCZg8VAgQxMTEySuOAkOino+a2iOOAkeODjeODg+ODiGRl6aGn5ZWP44Gr44Ot44Kw44Kk44Oz44GX44Gl44KJ44GE54++6LGh44Gr44Gk44GE44GmZAIEDw8WAh8AaGRkGAIFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBQhidG5Mb2dpbgUJYnRuTG9naW4xBQlidG5Mb2dpbjIFBmd2TmV3cw88KwAMAQgCAWS9t3kyAgT2/o5SQsw5aFmc2wdfBVpjGdszW82pEbz6Kw==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/komon/WebResource.axd?d=3ZA59jKz-5LwpEPBJpVGuPTw8siFNgm7283NITQx_lQoV3E2sDSKy0ZXFONFws3uo0B4mazJwhrmkZ07l2Ev-Lx37iIdvjwBgl96zmIPx7M1&amp;t=638460562960000000" type="text/javascript"></script>
+
+
+<script src="/komon/ScriptResource.axd?d=jP8nElRZ7AIhmAsc8GjreuzT83P257HYBA19QVfsiPV6_4eVtcAfmeR82bpdMMODKJCzSEXCbZKi65QFLtWOh0WwrhP7jIDEJuOOTDURF9qiFWcc0J-BNSZ6qu_0P1fsP8O--i-QxHZHNSw-kmGNZ49rdBBg4r5d8xVRo06mRFI1&amp;t=74258c30" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=lj1ciJH3ydYiYWuj-MhvQX2YSVUn3BEmsAzLiV4Y_nsUEkuavzurNL1WB7kwPfsTZZ2Z1cE05k3RTDXYkWNyunBtfRv2Kp3tKNDKiXRmaMdhm5lthe5oqIVx97bbQlK1DyhpMHo6xHRYX1n60u10rW78mBFwKbTpjnK-PxlY7cSL7ND6QjudwEIIKHnuKT7u0&amp;t=74258c30" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=OGhD-F0Gd8N79y5HSaKUEtT4AVQxUtl71ZypQrr1oL7JkcVAqsIqS5mbQP9XAcgSQOLpOmdYP7xazAWYyjNanfqaSTQVpnDyj91pYBHRSvWt3kArWX1l4RTdqD21usQhIewdRC5KZIpcyOngCJrhNa8EPRSMIr1DMTdEzYS2MiQ1&amp;t=3e866c0a" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=euNZWd9QGFiT_oifVYoKlbVKme4G3suwXEnynyqzsOW43vtEDfc24r5ZCBrBF_ZZe2vQyhkrQiyxv9m0XrvJHFatjnDuKIsLhZxbraSWUfHgs5hWPyIOYZyUOudG_23ADwmiKEpKeSQD0vWhuBDY8_7XWAGspEDUOYiZUipQH3c1&amp;t=3e866c0a" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=CRB6H4SfG_6_beiQmCZP_4ikzEyihVJYqqyHPSmu5kRiXQVdh5Uefb1dLZbpVluq0WGLk9ZASDRFf1q73trQb75lrIpf9ohYGyzmaJ-vPg0I0v0vHTDm_i9lPc1t98ecgj6qU9QtJ4skjW70yOgSkL0JzzRsjFZICqsLBlw0S7I-z4brVt3i_bVJYpgz5eTL0&amp;t=3e866c0a" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=Gi3yQoZbln3444SNk8Hfkq_gos6hFKroZQi8LRYJkKu5bBGZOzkwtFUlouP_IYzV4K4o_NZjnb9qMpj1gwisn2q0E3TO_7wZcbxGjLsWI1B2zl8IlAGYpARV2FlrND_9F3EqZDma1iep3BSXQ0yE07VDRGR2aK2AZtJW0ZvQJHc1&amp;t=3e866c0a" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=MXGiJRlAM6V3Y8fEYdgMJKCF-ULiQy1W20qa-mWvUDaY-DXTFZFdfba3IMK5FJvBIYnHSTQkHWUGygpuAiB4Iy5pPre76H9t0mgFGcx7KKJr7sU_mt7JsXWly-aOv0hmnTHD-6G1vPtFiD79avku4S78H3ax3aE9rXq92e8GwKhyQx_XYqhmr20QfVipvuNB0&amp;t=3e866c0a" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=Jhc20Ks4fA8SG6WwdvjzfeqbCs5kRz75HEiAH8MIyuy35NDPa7mxLI_tEhZ2qY7ubvn-NWvtKJXZCesN5ydlpIJkJE05hAhILCJh_m3nDbzyoa3kwRoQ0lYSy2c_7MSx6gs643H3FuROEbGkoeeuc72UTdEUw7mbAhK1Y2yBvRE1&amp;t=3e866c0a" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=m88C8uB7X78c29429VXRUj1sITHxKg9Tn_gQe4kI1uIsNNBE8q4LVnRf-KOzz6XsU1PKWT7p4YCDO_mzRUYI4t4olpvZJOSitEGvEQjfgo1qkfjtOCAVk-hDvwaWbB6P4WyqewB2BU-FviXzPwXKg1S9WQ-aX9WFaLpc4Dqrf1ozSX_QemWq2t5DMv8XTqzb0&amp;t=3e866c0a" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=59hxCDcGmqglnwoevKpOEJeWiOJVwyhY_vNpl-J38XCSHughFhSxixBB0uCeGFs2H_IxzVrtKqneJXnaxu4QkBfpmK5ZM9tGEjyL4ips-TewZa7N4Sc3xsLjQmb1AgzlOvQLs7-w6HIvPBGcjFDCoQQfmNI0Z287L1fH-3wTseVDI3GmHVSS7LLoZElwuDrU0&amp;t=3e866c0a" type="text/javascript"></script>
+<script src="/komon/ScriptResource.axd?d=7NmpI7Lf6ARx9ivhlM3eYVJFYzECOe1bQNR4SwXVH9ghLICB-_JMcUbspdwJnSFq5mE0j7hoC8lkNQzvR-rYCnjfE2oH_lyNNDdUjIScZyn1NZRnYxDI2LCqJRJH2mxPo6rlxxgaa5Yu8fEyh3kSDFIhXu6Vrk17bCsYdlkeiudb9nrahNPDig1DvmamdtjD0&amp;t=3e866c0a" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="2033F6F8" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdABn8rHiVy3SXJjY4rGd4RGjx/Ep0Y/lBftJlTqq/KO9UmCScb3KAoVbRx2o8Y4TEfDpZ3KM44mNrnq0+H8oX8i7LK23jEXYjuwgsh7I+d4SQaaKeKEbp39eHc9mbdvkCgxDfQ+X0wTteIkShm4kuVLEQP+mbEnxqD1IA8Eanf1nK1B378xXdzC2z2fm2vFas0gLqEdNy2vskrp2xXJwfdACHTX8JFLG6i/099Vcvr3MR3r8ekZCCXLZiLAQ53A4CVA1HvxduS2XfGDgs/xggxfZYy+lHx7H65FDzo/ygkX0+6VNBbKD65xL7Iel9KkxAjgItfPQAwA9TWZ1m9sjrJ5FgRMIKreXdW059AC9Qv18qvciQwsf7A6bRZQi2bMQvelIjnkvjh3Gaks/yjVkWCrTarB5hP9iC1NajZTsRHYXpY+paLs8/TWJ7WZgDXBv7AeCCZm1VcrlAN4fnwra8f9iHa6CgwvBlcm0oSPeRn7WNMT9YyyR4qjX0bKJ2X6bXV1M7/996UB8ry+fcJhLqF17ZhavD2XEf+NsZrHX5W8yt087gqryldk06Q9pnnLSNZRU=" />
+</div>
+	<!-- logContainer start -->
+	<div class="logContainer"><h1>ネットde顧問</h1>
+		<!-- logWrap start -->
+		<div class="logWrap">
+			<!-- logHeader start -->
+			<div class="logHeader">
+				<div class="logNormal">ログイン</div>
+			</div>
+			<!-- logHeader end -->						
+			<!-- logMain start -->
+			<div class="logMain">
+			    <input type="hidden" name="hdnPS" id="hdnPS" />
+			    <div class="logAlert">
+			        
+	                <input type="submit" name="btnDummy" value="" onclick="return false;" id="btnDummy" class="btnDummy" />
+			    </div>
+			    <div class="logIdPass">				
+				    <table>
+				      <tr>
+					    <td class="logIdPassH"><img src="images/img_login_id.gif" alt="ID" /></td>
+					    <td>
+					        <input name="txtID" type="text" value="B1120401" id="txtID" tabindex="1" class="textBox" onblur="OnBlurLoginId(this);" style="width:150px;ime-mode:disabled;" />
+					    </td>
+				      </tr>
+				      <tr>
+					    <td class="h5box"></td>
+				      </tr>
+				      <tr>
+					    <td class="logIdPassH"><img src="images/img_login_pass.gif" alt="パスワード" /></td>
+					    <td>
+					        <input name="txtPsw" type="password" id="txtPsw" tabindex="2" class="textBox" style="width:150px;" />
+					    </td>
+				      </tr>
+				    </table>
+			    </div>
+				<div style="float: right;margin: 5px 25px 5px 10px; ">
+			        <input type="image" name="btnLogin" id="btnLogin" tabindex="3" onmouseover="MM_swapImage(this.id,&#39;&#39;,&#39;/komon/images/btn_login_on.gif&#39;,1);" onmouseout="MM_swapImgRestore();" src="/komon/images/btn_login.gif" style="border-width:0px;" />
+
+                    <input type="hidden" name="LoginedID" id="LoginedID" />
+                    <input type="hidden" name="OverWrite" id="OverWrite" />
+					<input type="hidden" name="TwoFaType" id="TwoFaType" value="1" />
+			    </div>
+			    <div class="clear"></div>
+			    <div>※ID、パスワードを忘れた方は管理者へご連絡ください。<br /><br /></div>
+			    
+				<div style="text-align:left; padding-left:5px;"><br />
+				<div style="margin-top:10px;margin-left:10px;margin-right:10px;border-top:1px solid #9FB8D5;line-height:20px;vertical-align:middle;" align="left">
+<b class="cRed">ネットde顧問　２要素認証ログイン導入のご案内</b><br />
+<b>ネットde顧問２要素認証につきまして、２０２４年６月５日（水）より全ユーザー様が適用になりました。</b><br />
+それに伴い一部機能のバージョンアップを行っております。<br />
+変更内容は<a href="/cla_manual/doc/twofa_comp/６月５日バージョンアップについて（事業所版）.pdf" target="_blank" >こちら</a>をご参照下さい。<br />
+システムの概要・イメージにつきましては<a href="/cla_manual/doc/twofa_comp/事業所・従業員様用_ネットde顧問２要素認証導入のご案内.pdf" target="_blank" >こちら</a>をご参照お願い致します。
+<br />
+<br />
+２要素認証システムの設定手順等につきましては、下記に簡易マニュアルおよび動画をご用意させて頂きましたので、ネットde顧問をご利用になるブラウザに合わせて参照お願い致します。<br />
+<!--詳細マニュアルはログイン後のマニュアルリストからご参照下さい。<br />--><br />
+　　　　　○Microsoft Edgeをご利用の方<br />
+　　　　　　簡易手順書は<a href="/cla_manual/doc/twofa_comp/★2要素認証設定【Microsoft Edgeご利用の場合】.pdf" target="_blank" >こちら</a>　　設定動画は<a href="https://youtu.be/YqWDPBnOo1c" target="_blank" >こちら</a><br />
+　　　　　○Google Chromeをご利用の方<br />
+　　　　　　簡易手順書は<a href="/cla_manual/doc/twofa_comp/★2要素認証設定【Google Chromeご利用の場合】.pdf" target="_blank" >こちら</a>　　設定動画は<a href="https://youtu.be/3UGulcZxVgQ" target="_blank" >こちら</a><br />
+　　　　　○２要素認証についてのよくあるご質問は<a href="/cla_manual/doc/twofa_comp/２要素認証よくあるご質問集.pdf" target="_blank" >こちら</a>
+				</div>
+				</div>
+				<!-- モーダルウィンドウ START -->
+				<input name="txtPswHide" type="text" value="odzwn6as2Z!" id="txtPswHide" class="textBox" style="width:150px;display:none;" />
+				<script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [], 90, '');
+//]]>
+</script>
+
+				
+				
+
+					<!-- 初回2FA -->
+					
+
+					<div id="pnlInputFa1" class=".textC" style="width:440px;display:none;background-color:White; top: 10px; height: 85vh; overflow-y: auto;">
+	
+			            <br />
+						<h4 class="popHeader">二要素認証設定</h4>
+						<br />
+						<div class=".textC popMain">
+							二要素認証の設定登録を行います。<br />
+							二要素認証アプリを起動して下記バーコードを<br />
+							読み取ってください。<br />
+							読み取りが出来ない場合はバーコード下にあるキーを<br />
+							認証アプリに手入力してください。<br />
+							<br />
+							
+							<a id="manualUrl" download="" href="/cla_manual/doc/%ef%bc%92%e8%a6%81%e7%b4%a0%e8%aa%8d%e8%a8%bc%e3%82%b3%e3%83%bc%e3%83%89%e5%8f%96%e5%be%97%e3%82%a2%e3%83%97%e3%83%aa%20%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab%e6%89%8b%e9%a0%86%e6%9b%b8.pdf">
+								認証アプリを未インストールの方はこちら
+							</a>
+							
+							<hr>
+							<br />
+							
+							<img src="no QR" />
+							<div class=".textC popMain">
+								<span id="Label1">キー：</span>
+								<span id="QRKey"></span>
+								<br />
+								<span id="QRKey2">（バーコードが読み取れない方）</span>
+							</div>
+							<br />
+							<hr>
+							<br />
+							バーコードの読み込みまたはキー入力後に認証アプリに<br />
+							表示されている６桁のコードを入力し、登録をクリック<br />
+							してください（入力を５回誤ると３０分ロックがかかります）<br />
+							<h4 class="popMainRed">登録設定が正常完了するまでこの画面は終了しないで下さい</h4>
+							<div class=".textC .popKeyText">
+								<input name="txtOne" maxlength="6" id="txtOne" type="text" oninput="value = value.replace(/[^0-9]+/i,&#39;&#39;);" onkeyup="nextfeild2(this,6)" onfocus="this.select();" style="width:40%;text-align: center; font-size: 30px; letter-spacing: 5px;" />
+							</div>
+						</div>
+            
+		    		<br />	
+						<div class="popFooter .textC">
+							<input type="submit" name="btn2FactorSend" value="登録" id="btn2FactorSend" class="inputBtnLw" style="background-color:#FFCC66;width:75px;" />
+							<input type="submit" name="btn2FactorCancel" value="キャンセル" onclick="FaCancel();" id="btn2FactorCancel" class="inputBtnLw" style="width:75px;" />
+						</div>
+    	    
+					
+</div>
+					<!-- 初回2FA -->
+				<input type="submit" name="btnDummyForModal1" value="" id="btnDummyForModal1" style="display:none;" />
+				
+				<!-- モーダルウィンドウ END -->
+				<!-- モーダルウィンドウ START -->
+				
+				
+					<!-- 2FA -->
+					
+
+					<div id="pnlInputFa2" class=".textC" style="width:440px;display:none;background-color:White;">
+	
+			            <br />
+						<h4 class="popHeader">二要素認証</h4>
+						<div class=".textC popMain">
+							<br />
+							二要素設定登録した認証アプリを起動して表示される<br />
+							６桁のコードを入力し認証をクリックしてください。<br />
+							（入力を５回誤まると３０分ロックがかかります）<br />
+							<br />
+							<div class=".textC .popKeyText">
+								<input name="txtOne2" maxlength="6" id="txtOne2" class="textBox" type="text" inputmode="numeric" oninput="value = value.replace(/[^0-9]+/i,&#39;&#39;);" onkeyup="nextfeild2(this,6)" onfocus="this.select();" style="width:40%;text-align: center; font-size: 30px; letter-spacing: 5px;" />
+							</div>
+						</div>
+            
+		    		<br />	
+						<div class="popFooter .textC">
+							<input type="submit" name="btn2FactorSend2" value="認証" id="btn2FactorSend2" class="inputBtnLw" style="background-color:#FFCC66;width:75px;" />
+							<input type="submit" name="btn2FactorCancel2" value="キャンセル" onclick="FaCancel();" id="btn2FactorCancel2" class="inputBtnLw" style="width:75px;" />
+						</div>
+    	    
+						<div class=".textC popMain">
+							<!-- ５回ミスアラート -->
+						</div>
+					
+</div>
+					<!-- 2FA -->
+					<input type="submit" name="btnDummyForModal2" value="" id="btnDummyForModal2" style="display:none;" />
+				
+				<!-- モーダルウィンドウ END -->
+
+				<!-- モーダルウィンドウ START -->
+				
+				
+					<!-- パスワード変更しない閲覧のみ -->
+					
+
+					<div id="pnlInputFa3" class=".textC" style="width:440px;display:none;background-color:White;">
+	
+			            <br />
+						<div class=".textC popMain">
+                                仮パスワードから変更されていません。<br />
+                                ログイン画面の「すべての機能を利用する」ボタンから<br />
+                                2要素認証ログイン後、パスワード変更を推奨します。<br />
+						</div>
+		    		<br />	
+						<div class="popFooter .textC">
+							<input type="submit" name="btn2FactorCance3" value="ログイン画面に戻る" onclick="FaCancel();" id="btn2FactorCance3" class="inputBtnLw" style="width:150px;font-size:12px" />
+							<input type="submit" name="btn2FactorNoPwChg" value="あとで変更する" id="btn2FactorNoPwChg" class="inputBtnLw" style="background-color:#FFCC66;width:150px;font-size:12px" />
+						</div>
+    	    
+						<div class=".textC popMain">
+							<!-- ５回ミスアラート -->
+						</div>
+					
+</div>
+					<!-- 2FA -->
+					<input type="submit" name="btnDummyForModal3" value="" id="btnDummyForModal3" style="display:none;" />
+				
+				<!-- モーダルウィンドウ END -->
+
+				<!-- モーダルウィンドウ START -->
+				
+				
+					<!-- 2FA -->
+					
+
+					<div id="pnlInputFa0" class=".textC" style="width:400px;display:none;background-color:White;">
+	
+						<br />
+						<h4 class="popHeader">二要素認証 ログイン選択</h4>
+						<br />
+						<div class="box_login" style="float: left;margin: 10px 10px 0px 10px; ">
+							<span class="box-title">Log In</span>
+							<input type="image" name="btnLogin1" id="btnLogin1" tabindex="3" onmouseover="MM_swapImage(this.id,&#39;&#39;,&#39;/komon/images/btn_login_two_on.gif&#39;,1);" onmouseout="MM_swapImgRestore();" src="/komon/images/btn_login_two.gif" style="border-width:0px; width:auto; height:90px;" />
+							<input type="image" name="btnLogin2" id="btnLogin2" tabindex="3" onmouseover="MM_swapImage(this.id,&#39;&#39;,&#39;/komon/images/btn_login_on_Only.gif&#39;,1);" onmouseout="MM_swapImgRestore();" src="/komon/images/btn_login_Only.gif" style="border-width:0px;margin:0px 0px 0px 10px; width:auto; height:90px;" />
+							<p>全ての機能を利用する場合は２要素認証が必要です</p>
+							<br />
+							<div class="popFooter .textC">
+								<input type="submit" name="Button2" value="キャンセル" onclick="FaCancel();" id="Button2" class="inputBtnLw" style="width:75px;" />
+							</div>
+						</div>
+
+					
+</div>
+					<!-- 2FA -->
+					<input type="submit" name="btnDummyForModal0" value="" id="btnDummyForModal0" style="display:none;" />
+				
+				<!-- モーダルウィンドウ END -->
+
+    	        <div class="w740" align="center">
+	                <div class="gotoList2"> 
+			            <div>
+	<table cellspacing="0" cellpadding="4" border="0" id="gvNews" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">&nbsp;</th><th scope="col">&nbsp;</th><th scope="col">&nbsp;</th>
+		</tr><tr class="conData">
+			<td class="conData" align="left" style="width:10%;">
+                                    
+                                </td><td class="conData textC" style="width:15%;">
+                                   <span id="gvNews_ctl02_lblKaiseiDate" style="font-size:Small;">2024/07/16</span>
+                                </td><td class="conData">
+                                    
+                                    <a style="color: blue; font-size: small;text-align:left;" href='./systemnews_static_detail.aspx?no=1114' >【解消】ネットde顧問にログインできない事象について</a>
+                                    &nbsp;
+                                </td>
+		</tr><tr class="conData">
+			<td class="conData" align="left" style="width:10%;">
+                                    
+                                </td><td class="conData textC" style="width:15%;">
+                                   <span id="gvNews_ctl03_lblKaiseiDate" style="font-size:Small;">2024/06/26</span>
+                                </td><td class="conData">
+                                    
+                                    <a style="color: blue; font-size: small;text-align:left;" href='./systemnews_static_detail.aspx?no=1113' >2024年6月26日(水)リリースのご案内</a>
+                                    &nbsp;
+                                </td>
+		</tr><tr class="conData">
+			<td class="conData" align="left" style="width:10%;">
+                                    
+                                </td><td class="conData textC" style="width:15%;">
+                                   <span id="gvNews_ctl04_lblKaiseiDate" style="font-size:Small;">2024/06/20</span>
+                                </td><td class="conData">
+                                    
+                                    <a style="color: blue; font-size: small;text-align:left;" href='./systemnews_static_detail.aspx?no=1112' >【解消】ネットde顧問にログインしづらい現象について</a>
+                                    &nbsp;
+                                </td>
+		</tr>
+	</table>
+</div>
+    		        </div>
+	    	        <div class="right">
+                        &nbsp;
+
+	                </div>
+	            </div>
+	        </div>
+    		<!-- logMain end -->
+			<!-- logFooter start -->
+		    <div class="logFooter">Powered by 株式会社エムケイシステム</div>
+			<!-- logFooter end -->
+		</div>
+	</div>
+		<!-- logWrap end -->
+	<!-- logContainer end -->
+	
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {var fn = function() {AjaxControlToolkit.ModalPopupBehavior.invokeViaServer('ModalPopupExtender0', true); Sys.Application.remove_load(fn);};Sys.Application.add_load(fn);})();Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"pnlInputFa1","dynamicServicePath":"/komon/login.aspx","id":"ModalPopupExtender1"}, null, null, $get("btnDummyForModal1"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"pnlInputFa2","dynamicServicePath":"/komon/login.aspx","id":"ModalPopupExtender2"}, null, null, $get("btnDummyForModal2"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"pnlInputFa3","dynamicServicePath":"/komon/login.aspx","id":"ModalPopupExtender3"}, null, null, $get("btnDummyForModal3"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"pnlInputFa0","dynamicServicePath":"/komon/login.aspx","id":"ModalPopupExtender0"}, null, null, $get("btnDummyForModal0"));
+});
+//]]>
+</script>
+</form>
+</body>
+</html>
