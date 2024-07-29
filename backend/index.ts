@@ -118,7 +118,7 @@ import path from "path";
 
       // 7月分が公開されたら 7
       // 開発中は 6
-      if (targetYaer == "2024" && (numberMounth > 6 || targetMonth == "")) {
+      if (targetYaer == "2024" && (numberMounth > 7 || targetMonth == "")) {
         console.error("target: %s/%s", targetYaer, targetMonth);
       } else {
         console.log("target: %s/%s", targetYaer, targetMonth);
